@@ -1,19 +1,20 @@
 "use client"
 
 import { useState } from "react"
+import {useRouter} from "next/navigation"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [message, setMessage] = useState("")
+  const router = useRouter()
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    // Temporary frontend-only login logic
+    // Temporary frontend-only login logic. Does not check credentials.
     if (email && password) {
-      setMessage(`Welcome, ${email}! (Backend coming soon 🚀)`)
+      router.push("/dashboard")
     } else {
-      setMessage("Please enter both email and password.")
+      alert("Please enter both email and password.")
     }
   }
 
