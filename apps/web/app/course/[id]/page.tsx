@@ -1,10 +1,6 @@
 import Link from "next/link"
 
-interface CoursePageProps {
-  params: { id: string }
-}
-
-export default function CoursePage({ params }: CoursePageProps) {
+export default function CoursePage({ params }: { params: { id: string } }) {
   const { id } = params
 
   return (
