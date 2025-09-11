@@ -2,7 +2,11 @@
 
 import { useState } from "react"
 
-export default function AssignmentPage({ params, }: { params: { id: string } }) {
+interface AssignmentPageProps {
+  params: { id: string }
+}
+
+export default function AssignmentPage({ params }: AssignmentPageProps) {
   const { id } = params
   const [code, setCode] = useState("")
 
@@ -58,4 +62,3 @@ export default function AssignmentPage({ params, }: { params: { id: string } }) 
     </main>
   )
 }
-
