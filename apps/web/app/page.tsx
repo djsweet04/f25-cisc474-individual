@@ -46,10 +46,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {message && (
-          <p className="mt-4 text-center text-sm text-gray-700">{message}</p>
-        )}
-
         <div className="mt-6 text-center">
           <p className="text-sm">
             Don’t have an account?{" "}
