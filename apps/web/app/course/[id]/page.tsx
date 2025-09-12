@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { useRouter } from "next/router"
+import { useParams } from "next/navigation"
 
 export default function CoursePage() {
-  const router = useRouter()
-  const { id } = router.query
+  const params = useParams<{ id: string }>()
+  const id = params.id
 
   return (
     <main className="p-8 bg-gray-100 min-h-screen">
