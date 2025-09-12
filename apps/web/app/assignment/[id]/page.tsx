@@ -1,13 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from 'next/router'
 
-interface AssignmentPageProps {
-  params: { id: string }
-}
-
-export default function AssignmentPage({ params }: AssignmentPageProps) {
-  const { id } = params
+export default function AssignmentPage() {
+  const router = useRouter()
+  const { id } = router.query
   const [code, setCode] = useState("")
 
   function handleSubmit(){
