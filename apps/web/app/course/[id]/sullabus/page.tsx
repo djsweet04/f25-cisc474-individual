@@ -1,9 +1,10 @@
-interface SyllabusPageProps {
-  params: { id: string }
-}
+"use client"
 
-export default function SyllabusPage({ params }: SyllabusPageProps) {
-  const { id } = params
+import { useParams } from "next/navigation"
+
+export default function SyllabusPage() {
+  const paramas = useParams<{ id: string }>()
+  const id = paramas.id
 
   return (
     <main className="p-8 bg-gray-100 min-h-screen">
