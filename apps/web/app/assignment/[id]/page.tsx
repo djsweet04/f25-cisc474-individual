@@ -1,10 +1,12 @@
-import { useState } from "react"
-import { useRouter } from 'next/router'
+"use client"
+
+//import { useState } from "react"
+import { useParams } from 'next/navigation'
 
 export default function AssignmentPage() {
-  const router = useRouter()
-  const { id } = router.query
-  const [code, setCode] = useState("")
+  const params = useParams<{ id: string }>()
+  const id = params.id
+//  const [code, setCode] = useState("")
 
   function handleSubmit(){
     alert("Code submitted for Assignment " + id)
@@ -39,8 +41,8 @@ export default function AssignmentPage() {
         <section className="flex-1 p-6 flex flex-col">
           <h2 className="text-lg font-semibold mb-2">Code Editor</h2>
           <textarea
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
+            //value={code}
+            //onChange={(e) => setCode(e.target.value)}
             className="flex-1 w-full border rounded p-2 font-mono text-sm"
             placeholder="// Write your solution here..."
           />
@@ -58,4 +60,3 @@ export default function AssignmentPage() {
     </main>
   )
 }
-
