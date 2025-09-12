@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 
 export default function DashboardPage() {
@@ -6,15 +8,19 @@ export default function DashboardPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Student Dashboard</h1>
 
-        {/* Upcoming Assignments */}
+        {/* Course Cards */}
         <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">Upcoming Assignments</h2>
+          <h2 className="text-xl font-semibold mb-3">My Courses</h2>
           <ul className="space-y-3">
             <li className="bg-white p-4 rounded shadow">
-              CS101 - Homework 3 (Due in 2 days)
+              <Link href="/course/101" className="text-blue-600 hover:underline">
+                CS101 - Introduction to Programming
+              </Link>
             </li>
             <li className="bg-white p-4 rounded shadow">
-              CS220 - Project Proposal (Due in 7 days)
+              <Link href="/course/220" className="text-blue-600 hover:underline">
+                CS220 - Data Structures
+              </Link>
             </li>
           </ul>
         </section>
