@@ -15,7 +15,7 @@ export default function CoursePage() {
         {/* Navigation */}
         <nav className="mb-8">
           <Link href={`/course/${id}/syllabus`} className="text-blue-600 hover:underline">
-            Sullabus
+            Syllabus
           </Link>
         </nav>
 
@@ -47,4 +47,5 @@ export default function CoursePage() {
     </main>
   )
 }
+
 
