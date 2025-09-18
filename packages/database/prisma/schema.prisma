@@ -12,9 +12,44 @@ generator client {
   output   = "../generated/client"
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
+model Student {
+  student_cuid            String    @id @default(cuid())
+  name          String
   email         String?   @unique
-  emailVerified DateTime?
+  courses       Course[]
+  submissions   Submission[]
 }
+
+model Course {
+  course_cuid            String  @id @default(cuid())
+  title         String
+  syllabus      String?
+  students      Student[]
+  assignments   Assignment[]
+}
+
+model Assignment {
+  assignment_cuid String  @id @default(cuid())
+  overview    String
+  problems Problem[]
+  submissions Submission[]
+  course      Course  @relation(fields: [course_cuid], references: [course_cuid])
+  course_cuid String
+}
+
+model Problem {
+  problem_cuid  String  @id @default(cuid())
+  description String
+  assignment Assignment @relation(fields: [assignment_cuid], references: [assignment_cuid])
+  assignment_cuid String
+}
+
+model Submission {
+  submission_cuid String     @id @default(cuid())
+  submission      String?
+  assignment      Assignment @relation(fields: [assignment_cuid], references: [assignment_cuid])
+  assignment_cuid String
+  student         Student    @relation(fields: [student_cuid], references: [student_cuid])
+  student_cuid    String
+}
+
