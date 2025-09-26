@@ -7,5 +7,5 @@
     "composite": false,
     "noEmit": false
   },
-  "include": ["src", "../generated/client"] // include your generator output
+  "include": ["src", "generator"] // include your generator output
 }
