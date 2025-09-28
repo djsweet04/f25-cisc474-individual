@@ -2,18 +2,18 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
-export class CoursesService {
+export class SubmissionsService {
     constructor(private prisma: PrismaService) {}
 
     async findAll() {
-        return this.prisma.course.findMany();
+        return this.prisma.submission.findMany();
     }
 
     async findOne(id: number) {
-        const course = await this.prisma.course.findUnique({
+        const submission = await this.prisma.submission.findUnique({
             where: { id },
         });
-        if (!course) throw new NotFoundException(`Course with ID ${id} not found`);
-        return course;
+        if (!submission) throw new NotFoundException(`Submission with ID ${id} not found`);
+        return submission;
     }
 }

@@ -5,9 +5,12 @@ import { PrismaService } from './prisma.service';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { StudentsModule } from './students/students.module';
+import { AssignmentsModule } from './assignments/assignments.module';
+import { ProblemsModule } from './problems/problems.module';
+import { SubmissionsModule } from './submissions/submissions.module';
 
 @Module({
-  imports: [LinksModule, StudentsModule],
+  imports: [LinksModule, StudentsModule, AssignmentsModule, ProblemsModule, SubmissionsModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
   exports: [PrismaService],
