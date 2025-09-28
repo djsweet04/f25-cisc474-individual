@@ -6,7 +6,7 @@ export class AssignmentsController {
     constructor(private readonly assignmentsService: AssignmentsService) {}
 
     @Get()
-    findall() {
+    findAll() {
         return this.assignmentsService.findAll();
     }
 

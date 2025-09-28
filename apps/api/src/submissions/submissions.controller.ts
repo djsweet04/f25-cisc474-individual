@@ -6,7 +6,7 @@ export class SubmissionsController {
     constructor(private readonly submissionsService: SubmissionsService) {}
 
     @Get()
-    findall() {
+    findAll() {
         return this.submissionsService.findAll();
     }
 

@@ -6,7 +6,7 @@ export class ProblemsController {
     constructor(private readonly problemsService: ProblemsService) {}
 
     @Get()
-    findall() {
+    findAll() {
         return this.problemsService.findAll();
     }
 
