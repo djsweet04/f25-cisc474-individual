@@ -1,8 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StudentsController } from './students.controller';
 import { describe, it, expect, beforeEach } from '@jest/globals';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
 
 describe('StudentsController', () => {
   let controller: StudentsController;

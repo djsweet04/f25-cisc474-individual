@@ -9,11 +9,11 @@ export class CoursesService {
         return this.prisma.course.findMany();
     }
 
-    async findOne(id: number) {
+    async findOne(cuid: string) {
         const course = await this.prisma.course.findUnique({
-            where: { id },
+            where: { course_cuid: cuid },
         });
-        if (!course) throw new NotFoundException(`Course with ID ${id} not found`);
+        if (!course) throw new NotFoundException(`Course with ID ${cuid} not found`);
         return course;
     }
 }

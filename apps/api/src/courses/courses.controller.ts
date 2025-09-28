@@ -10,8 +10,8 @@ export class CoursesController {
         return this.coursesService.findAll();
     }
 
-    @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
-        return this.coursesService.findOne(id);
+    @Get(':cuid')
+    findOne(@Param('cuid') cuid: string) {
+        return this.coursesService.findOne(cuid);
     }
 }

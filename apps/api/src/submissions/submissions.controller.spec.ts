@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SubmissionsController } from './submissions.controller';
+import { describe, it, expect, beforeEach } from '@jest/globals';
 
 describe('SubmissionsController', () => {
   let controller: SubmissionsController;

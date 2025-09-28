@@ -9,11 +9,11 @@ export class StudentsService {
     return this.prisma.student.findMany();   // Return all users
   }
 
-  async findOne(id: number) {
+  async findOne(cuid: string) {
     const student = await this.prisma.student.findUnique({
-      where: { id },
+      where: { student_cuid: cuid },
     });
-    if (!student) throw new NotFoundException(`Student with ID ${id} not found`);
+    if (!student) throw new NotFoundException(`Student with ID ${cuid} not found`);
     return student;
   }
 }

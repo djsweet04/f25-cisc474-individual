@@ -10,8 +10,8 @@ export class ProblemsController {
         return this.problemsService.findAll();
     }
 
-    @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
-        return this.problemsService.findOne(id);
+    @Get(':cuid')
+    findOne(@Param('cuid') cuid: string) {
+        return this.problemsService.findOne(cuid);
     }
 }

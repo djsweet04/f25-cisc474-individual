@@ -9,11 +9,11 @@ export class SubmissionsService {
         return this.prisma.submission.findMany();
     }
 
-    async findOne(id: number) {
+    async findOne(cuid: string) {
         const submission = await this.prisma.submission.findUnique({
-            where: { id },
+            where: { submission_cuid: cuid },
         });
-        if (!submission) throw new NotFoundException(`Submission with ID ${id} not found`);
+        if (!submission) throw new NotFoundException(`Submission with ID ${cuid} not found`);
         return submission;
     }
 }

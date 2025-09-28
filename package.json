@@ -21,7 +21,7 @@
     "prettier": "^3.6.2",
     "prisma": "^6.16.2",
     "tsx": "4.19.1",
-    "turbo": "^2.5.6",
+    "turbo": "^2.5.8",
     "typescript": "5.9.2"
   },
   "prisma": {
@@ -33,7 +33,10 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
-    "@prisma/client": "^6.16.2"
+    "@nestjs/config": "^4.0.2",
+    "@prisma/client": "^6.16.2",
+    "dotenv": "^17.2.2",
+    "prisma": "^6.16.2"
   },
   "packageManager": "npm@10.9.0",
   "workspaces": [

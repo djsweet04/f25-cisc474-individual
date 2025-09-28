@@ -10,8 +10,8 @@ export class SubmissionsController {
         return this.submissionsService.findAll();
     }
 
-    @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
-        return this.submissionsService.findOne(id);
+    @Get(':cuid')
+    findOne(@Param('cuid') cuid: string) {
+        return this.submissionsService.findOne(cuid);
     }
 }

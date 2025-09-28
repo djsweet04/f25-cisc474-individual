@@ -9,11 +9,11 @@ export class ProblemsService {
         return this.prisma.problem.findMany();
     }
 
-    async findOne(id: number) {
+    async findOne(cuid: string) {
         const problem = await this.prisma.problem.findUnique({
-            where: { id },
+            where: { problem_cuid: cuid },
         });
-        if (!problem) throw new NotFoundException(`Problem with ID ${id} not found`);
+        if (!problem) throw new NotFoundException(`Problem with ID ${cuid} not found`);
         return problem;
     }
 }

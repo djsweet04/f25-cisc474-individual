@@ -9,11 +9,11 @@ export class AssignmentsService {
         return this.prisma.assignment.findMany();
     }
 
-    async findOne(id: number) {
+    async findOne(cuid: string) {
         const assignment = await this.prisma.assignment.findUnique({
-            where: { id },
+            where: { assignment_cuid: cuid },
         });
-        if (!assignment) throw new NotFoundException(`Assignment with ID ${id} not found`);
+        if (!assignment) throw new NotFoundException(`Assignment with ID ${cuid} not found`);
         return assignment;
     }
 }

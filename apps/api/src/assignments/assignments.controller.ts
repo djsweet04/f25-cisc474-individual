@@ -10,8 +10,8 @@ export class AssignmentsController {
         return this.assignmentsService.findAll();
     }
 
-    @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
-        return this.assignmentsService.findOne(id);
+    @Get(':cuid')
+    findOne(@Param('cuid') cuid: string) {
+        return this.assignmentsService.findOne(cuid);
     }
 }
