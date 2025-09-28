@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { LinksModule } from './links/links.module';
 import { PrismaService } from './prisma.service';
 import { AppService } from './app.service';
@@ -11,7 +10,7 @@ import { ProblemsModule } from './problems/problems.module';
 import { SubmissionsModule } from './submissions/submissions.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env', }), LinksModule, StudentsModule, CoursesModule, AssignmentsModule, ProblemsModule, SubmissionsModule],
+  imports: [LinksModule, StudentsModule, CoursesModule, AssignmentsModule, ProblemsModule, SubmissionsModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
   exports: [PrismaService],
