@@ -1,6 +1,6 @@
-"use client"
-
 import Link from "next/link"
+import CourseList from "./CourseList"
+import { Suspense } from "react"
 
 export default function DashboardPage() {
   return (
@@ -24,6 +24,12 @@ export default function DashboardPage() {
             </li>
           </ul>
         </section>
+
+        <h2>CoursesV2</h2>
+        <Suspense fallback={<p>Loading courses...</p>}>
+          <CourseList />
+        </Suspense>
+
 
         {/* Quick Stats */}
         <section>

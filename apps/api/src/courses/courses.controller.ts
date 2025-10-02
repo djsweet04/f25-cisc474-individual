@@ -14,4 +14,9 @@ export class CoursesController {
     findOne(@Param('cuid') cuid: string) {
         return this.coursesService.findOne(cuid);
     }
+
+    @Get(':cuid/assignments')
+    async getAssignments(@Param('cuid') cuid: string) {
+        return this.coursesService.findAssignments(cuid);
+   }
 }

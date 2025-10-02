@@ -1,16 +1,16 @@
-"use client"
-
 import Link from "next/link"
-import { useParams } from "next/navigation"
+import AssignmentList from "./assignment/[assignmentId]/AssignmentList"
+import { Suspense } from "react"
+import { fetchCourse } from "../../../lib/api"
 
-export default function CoursePage() {
-  const params = useParams<{ id: string }>()
+export default async function CoursePage({ params }: { params: { id: string } }) {
   const id = params.id
+  const course = await fetchCourse(id);
 
   return (
     <main className="p-8 bg-gray-100 min-h-screen">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Course {id}</h1>
+        <h1 className="text-3xl font-bold mb-6">{course.title}</h1>
         
         {/* Navigation */}
         <nav className="mb-8">
@@ -42,6 +42,11 @@ export default function CoursePage() {
               </Link>
             </li>
           </ul>
+
+          <h2 className="text-xl font-semibold my-3">AssignmentsV2</h2>
+          <Suspense fallback={<p>Loading assignments...</p>}>
+            <AssignmentList course_cuid={id} />
+          </Suspense>
         </section>
       </div>
     </main>

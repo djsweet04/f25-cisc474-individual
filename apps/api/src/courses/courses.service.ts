@@ -16,4 +16,12 @@ export class CoursesService {
         if (!course) throw new NotFoundException(`Course with ID ${cuid} not found`);
         return course;
     }
+
+    async findAssignments(course_cuid: string) {
+    const course = await this.prisma.course.findUnique({
+      where: { course_cuid },
+      include: { assignments: true },
+    });
+    return course?.assignments ?? [];
+  }
 }
