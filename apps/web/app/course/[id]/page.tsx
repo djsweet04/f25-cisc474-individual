@@ -3,8 +3,8 @@ import AssignmentList from "./assignment/[assignmentId]/AssignmentList"
 import { Suspense } from "react"
 import { fetchCourse } from "../../../lib/api"
 
-export default async function CoursePage({ params }: { params: { id: string } }) {
-  const id = params.id
+export default async function CoursePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const course = await fetchCourse(id);
 
   return (

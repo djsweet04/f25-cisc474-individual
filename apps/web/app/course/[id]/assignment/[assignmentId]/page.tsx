@@ -1,10 +1,9 @@
 //import { fetchAssignment } from "../../../../lib/api"
-'use client'
 //import { useState } from "react"
 
-export default function AssignmentPage({ params }: { params: { id: string, assignmentId: string } }) {
+export default async function AssignmentPage({ params }: { params: Promise<{ id: string, assignmentId: string }> }) {
   //const assignment = await fetchAssignment(params.assignmentId);
-  const {id, assignmentId} = params;
+  const {id, assignmentId} = await params;
 //  const [code, setCode] = useState("")
 
   function handleSubmit(){
@@ -48,7 +47,7 @@ export default function AssignmentPage({ params }: { params: { id: string, assig
           
           {/* Submit Button */}
           <button
-            onClick={handleSubmit}
+            //onClick={handleSubmit}
             className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
           >
             Submit Solution
