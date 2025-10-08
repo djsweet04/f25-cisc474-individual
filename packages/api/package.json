@@ -4,16 +4,10 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-<<<<<<< HEAD
-    "dev": "npm run build -- --watch",
-    "build": "tsc -b -v",
-  "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
-=======
     "types": "tsc -p tsconfig.types.json",
     "dev": "tsup src/* --format cjs,esm --watch --onSuccess \"npm run types\"",
     "build": "tsup src/* --format cjs,esm && npm run types",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
->>>>>>> upstream/main
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
