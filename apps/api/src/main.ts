@@ -10,10 +10,12 @@ async function bootstrap() {
   const host = process.env.HOST || undefined;
 
   app.enableCors({
-    origin: process.env.FRONTENT_URL,
-    methods: 'GET,POST,PUT,DELETE',
+    origin: process.env.FRONTENT_URL || 'http://localhost:3001',
+    methods: ['GET,POST,PUT,DELETE'],
+    credentials: true,
   });
   await app.listen(port, host);
+  console.log(`API is running on http://${host || 'localhost'}:${port}`);
 }
 
 void bootstrap();

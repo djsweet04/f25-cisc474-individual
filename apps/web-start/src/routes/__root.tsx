@@ -11,7 +11,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools';
 import TanStackQueryDevtools from '../integrations/devtools';
 import appCss from '../styles.css?url';
 import type { QueryClient } from '@tanstack/react-query';
-
+import { Provider, getContext } from '../integrations/root-provider';
 export interface MyRouterContext {
   queryClient: QueryClient;
 }
@@ -42,12 +42,18 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const { queryClient } = getContext();
+
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
+        <Provider queryClient={queryClient}>
+          <Outlet />
+        </Provider>
+        
         {children}
         <TanStackDevtools
           config={{
