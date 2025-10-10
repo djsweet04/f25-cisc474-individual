@@ -10,7 +10,7 @@ async function bootstrap() {
   const host = process.env.HOST || undefined;
 
   app.enableCors({
-    origin: process.env.FRONTENT_URL || 'http://localhost:3001',
+    origin: process.env.FRONTENT_URL,
     methods: ['GET,POST,PUT,DELETE'],
     credentials: true,
   });
