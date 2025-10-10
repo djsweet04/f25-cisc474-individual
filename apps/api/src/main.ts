@@ -10,7 +10,7 @@ async function bootstrap() {
   const host = process.env.HOST || undefined;
 
   app.enableCors({
-    origin: process.env.FRONTENT_URL,
+    origin: process.env.FRONTEND_URL,
     methods: ['GET,POST,PUT,DELETE'],
     credentials: true,
   });
