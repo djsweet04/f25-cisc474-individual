@@ -1,26 +1,26 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-export function useBackendFetcher(){
+export function useBackendFetcher() {
   const { getAccessTokenSilently, isAuthenticated } = useAuth0();
 
-  async function fetchWithAuth<T>(endpoint: string): Promise<T> {
+  async function fetchWithAuth<T>(endpoint: string, options?: RequestInit): Promise<T> {
     const url = import.meta.env.VITE_BACKEND_URL + endpoint;
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-    };
+
+    // Create a proper Headers object
+    const headers = new Headers(options?.headers);
 
     if (isAuthenticated) {
-      try {
-        const token = await getAccessTokenSilently();
-        headers['Authorization'] = `Bearer ${token}`;
-      } catch (err) {
-        console.warn('Failed to retrieve access token', err);
-      }
+      const token = await getAccessTokenSilently();
+      headers.set('Authorization', `Bearer ${token}`);
     }
 
-    const response = await fetch(url, { headers });
-    if (!response.ok) throw new Error(`Fetch failed: ${response.statusText}`);
+    // Merge back with other options
+    const response = await fetch(url, {
+      ...options,
+      headers,
+    });
 
+    if (!response.ok) throw new Error(`Fetch failed: ${response.statusText}`);
     return response.json() as Promise<T>;
   }
 

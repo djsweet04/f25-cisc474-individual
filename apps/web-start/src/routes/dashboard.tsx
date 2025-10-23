@@ -5,7 +5,9 @@ import CourseList from '../components/CourseList';
 import CourseFormModal from '../components/CourseFormModal';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import { ProtectedRoute } from '../components/ProtectedRoute';
+import { useBackendFetcher } from '../integrations/fetcher';
 
+const fetcher = useBackendFetcher();
 
 export const Route = createFileRoute('/dashboard')({
   component: () => (
@@ -24,17 +26,15 @@ export default function DashboardComponent() {
 
   const handleAddCourse = async (courseData: any) => {
     try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/courses', {
+      const fetcher = useBackendFetcher();
+
+      await fetcher('/courses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(courseData),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to add course');
-      }
-
-      await queryClient.invalidateQueries({ queryKey: ['courses'],});
+      await queryClient.invalidateQueries({ queryKey: ['courses'] });
       setModalMode(null);
     } catch (error) {
       console.error('Error adding course:', error);
@@ -42,41 +42,35 @@ export default function DashboardComponent() {
   };
 
   const handleEditCourse = async (courseId: string, updatedData: any) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/courses/${courseId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedData),
-      });
+  try {
+    await fetcher(`/courses/${courseId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedData),
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to edit course');
-      }
+    await queryClient.invalidateQueries({ queryKey: ['courses'] });
+    await queryClient.invalidateQueries({ queryKey: ['course', courseId] });
+    setModalMode(null);
+  } catch (error) {
+    console.error('Error editing course:', error);
+  }
+};
 
-      await queryClient.invalidateQueries({ queryKey: ['courses'] });
-      await queryClient.invalidateQueries({ queryKey: ['course', courseId] });
-      setModalMode(null);
-    } catch (error) {
-      console.error('Error editing course:', error);
-    }
-  };
+const handleDeleteCourse = async (courseId: string) => {
+  try {
+    const fetcher = useBackendFetcher();
 
-  const handleDeleteCourse = async (courseId: string) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/courses/${courseId}`, {
-        method: 'DELETE',
-      })
+    await fetcher(`/courses/${courseId}`, {
+      method: 'DELETE',
+    });
 
-      if (!response.ok) {
-        throw new Error('Failed to delete course');
-      }
-
-      await queryClient.invalidateQueries({ queryKey: ['courses'] });
-      setModalMode(null)
+    await queryClient.invalidateQueries({ queryKey: ['courses'] });
+    setModalMode(null);
     } catch (error) {
       console.error('Error deleting course:', error);
     }
-};
+  };
   
   return (
     <main className="p-8 bg-gray-100 min-h-screen">
