@@ -4,10 +4,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import CourseList from '../components/CourseList';
 import CourseFormModal from '../components/CourseFormModal';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
+import { ProtectedRoute } from '../components/ProtectedRoute';
 
 
 export const Route = createFileRoute('/dashboard')({
-  component: DashboardComponent,
+  component: () => (
+    <ProtectedRoute>
+      <DashboardComponent />
+    </ProtectedRoute>
+  )
 });
 
 

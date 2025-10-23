@@ -1,9 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe, Body, Delete, Post, Put } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Body, Delete, Post, Put, UseGuards } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CourseDTO } from '@repo/api/dto/course.dto';
 import { CreateCourseDTO, UpdateCourseDTO, DeleteCourseDTO } from '@repo/api/dto/course-mutation.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('courses')
+@UseGuards(AuthGuard('jwt'))
 export class CoursesController {
     constructor(private readonly coursesService: CoursesService) {}
 

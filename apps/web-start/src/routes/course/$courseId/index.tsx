@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { backendFetcher } from '../../../integrations/fetcher'
+import { useBackendFetcher } from '../../../integrations/fetcher'
 import { Link } from '@tanstack/react-router';
 
 interface Assignment {
@@ -13,11 +13,12 @@ export const Route = createFileRoute('/course/$courseId/')({
 })
 
 function CourseOverview() {
+    const fetcher = useBackendFetcher();
     const { courseId } = Route.useParams()
 
     const { data: assignments } = useSuspenseQuery<Assignment[]>({
         queryKey: ['assignments', courseId],
-        queryFn: backendFetcher<Assignment[]>(`/courses/${courseId}/assignments`),
+        queryFn:() => fetcher(`/courses/${courseId}/assignments`),
     })
 
     return (

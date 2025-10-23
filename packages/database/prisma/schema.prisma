@@ -18,6 +18,8 @@ model Student {
   email         String?   @unique
   courses       Course[]
   submissions   Submission[]
+  user          User?     @relation(fields: [user_cuid], references: [user_cuid])
+  user_cuid     String?   @unique
 }
 
 model Course {
@@ -53,3 +55,18 @@ model Submission {
   student_cuid    String
 }
 
+model User {
+  user_cuid       String    @id @default(cuid())
+  email           String?   @unique
+  name            String?
+  authentications Authentication[]
+  student         Student?
+}
+
+model Authentication{
+  auth_cuid       String @id @default(cuid())
+  provider        String
+  providerId      String
+  user            User   @relation(fields: [user_cuid], references: [user_cuid])
+  user_cuid       String
+}
