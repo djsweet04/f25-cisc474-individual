@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useBackendFetcher } from '../integrations/fetcher';
 import { Link } from '@tanstack/react-router';
+import { useAuth0 } from '@auth0/auth0-react';
 
 interface Course {
     course_cuid: string;
@@ -14,13 +15,16 @@ interface Props {
 }
 
 export default function CourseList({ onEdit, onDelete }: Props) {
+  const { isAuthenticated, isLoading } = useAuth0();
   const fetcher = useBackendFetcher();
-  const { data: courses, isLoading, error } = useQuery<Course[]>({
+
+  const { data: courses, isLoading: coursesLoading, error } = useQuery<Course[]>({
     queryKey: ['courses'],
     queryFn: () => fetcher('/courses'),
+    enabled: isAuthenticated && !isLoading,
   });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (coursesLoading) return <p>Courses loading...</p>;
   if (error) return <p>Error loading courses</p>;
   if (!courses || courses.length === 0) return <p>No courses available</p>;
 

@@ -5,8 +5,6 @@ export function useBackendFetcher() {
 
   async function fetchWithAuth<T>(endpoint: string, options?: RequestInit): Promise<T> {
     const url = import.meta.env.VITE_BACKEND_URL + endpoint;
-
-    // Create a proper Headers object
     const headers = new Headers(options?.headers);
 
     if (isAuthenticated) {
@@ -14,7 +12,6 @@ export function useBackendFetcher() {
       headers.set('Authorization', `Bearer ${token}`);
     }
 
-    // Merge back with other options
     const response = await fetch(url, {
       ...options,
       headers,

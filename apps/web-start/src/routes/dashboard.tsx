@@ -7,8 +7,6 @@ import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { useBackendFetcher } from '../integrations/fetcher';
 
-const fetcher = useBackendFetcher();
-
 export const Route = createFileRoute('/dashboard')({
   component: () => (
     <ProtectedRoute>
@@ -27,7 +25,6 @@ export default function DashboardComponent() {
   const handleAddCourse = async (courseData: any) => {
     try {
       const fetcher = useBackendFetcher();
-
       await fetcher('/courses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,6 +40,7 @@ export default function DashboardComponent() {
 
   const handleEditCourse = async (courseId: string, updatedData: any) => {
   try {
+    const fetcher = useBackendFetcher();
     await fetcher(`/courses/${courseId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -60,7 +58,6 @@ export default function DashboardComponent() {
 const handleDeleteCourse = async (courseId: string) => {
   try {
     const fetcher = useBackendFetcher();
-
     await fetcher(`/courses/${courseId}`, {
       method: 'DELETE',
     });
