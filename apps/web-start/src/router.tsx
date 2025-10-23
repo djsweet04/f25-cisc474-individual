@@ -1,3 +1,4 @@
+//Comment so I can commit and redeploy on cloudflare because cloudflare is dumb
 import { createRouter } from '@tanstack/react-router';
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query';
 import * as TanstackQuery from './integrations/root-provider';
