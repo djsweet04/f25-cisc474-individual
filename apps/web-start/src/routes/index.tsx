@@ -10,10 +10,10 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const { loginWithRedirect, isAuthenticated,} = useAuth0()
 
-  if (isAuthenticated) {
-    navigate({ to: '/dashboard' })
-    return null;
-  }
+  // if (isAuthenticated) {
+  //   navigate({ to: '/dashboard' })
+  //   return null;
+  // }
 
   return (
   <main className="flex items-center justify-center h-screen bg-gray-100">
