@@ -40,15 +40,22 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       }),
 
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: process.env.AUTH0_AUDIENCE,
+      audience: [
+        process.env.AUTH0_AUDIENCE,
+        'http://localhost:3000',
+      ],
       issuer: `${process.env.AUTH0_ISSUER_URL}`,
       algorithms: ['RS256'],
     });
   }
 
   async validate(payload: JwtPayload): Promise<JwtUser> {
-    // You can see the JWT here
-    // console.log('JWT payload', payload);
+    console.log('🔍 JWT DEBUG -----------------------------------');
+    console.log('Issuer (iss):', payload.iss);
+    console.log('Audience (aud):', payload.aud);
+    console.log('Expected issuer:', process.env.AUTH0_ISSUER_URL);
+    console.log('Expected audience:', process.env.AUTH0_AUDIENCE);
+    console.log('-------------------------------------------------');
 
     const { sub } = payload;
     const { provider, providerId } = splitSub(sub);

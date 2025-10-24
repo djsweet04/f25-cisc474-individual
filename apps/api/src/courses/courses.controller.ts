@@ -8,7 +8,7 @@ import { AuthGuard } from '@nestjs/passport';
 @UseGuards(AuthGuard('jwt'))
 export class CoursesController {
     constructor(private readonly coursesService: CoursesService) {}
-
+    
     @Get()
     async findAll(): Promise<CourseDTO[]> {
         return this.coursesService.getAllCourses();

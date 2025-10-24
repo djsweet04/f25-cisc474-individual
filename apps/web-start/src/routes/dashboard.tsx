@@ -6,6 +6,7 @@ import CourseFormModal from '../components/CourseFormModal';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { useBackendFetcher } from '../integrations/fetcher';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const Route = createFileRoute('/dashboard')({
   component: () => (
@@ -17,18 +18,20 @@ export const Route = createFileRoute('/dashboard')({
 
 
 export default function DashboardComponent() {
+  const fetcher = useBackendFetcher();
   const queryClient = useQueryClient();
   const [modalMode, setModalMode] = useState<'add' | 'edit' | 'delete' | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<any>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { logout } = useAuth0();
 
   const handleAddCourse = async (courseData: any) => {
     try {
-      const fetcher = useBackendFetcher();
       await fetcher('/courses', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(courseData),
+        credentials: 'include',
       });
 
       await queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -40,11 +43,11 @@ export default function DashboardComponent() {
 
   const handleEditCourse = async (courseId: string, updatedData: any) => {
   try {
-    const fetcher = useBackendFetcher();
     await fetcher(`/courses/${courseId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedData),
+      credentials: 'include',
     });
 
     await queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -57,9 +60,9 @@ export default function DashboardComponent() {
 
 const handleDeleteCourse = async (courseId: string) => {
   try {
-    const fetcher = useBackendFetcher();
     await fetcher(`/courses/${courseId}`, {
       method: 'DELETE',
+      credentials: 'include',
     });
 
     await queryClient.invalidateQueries({ queryKey: ['courses'] });
@@ -134,6 +137,15 @@ const handleDeleteCourse = async (courseId: string) => {
           </div>
         </section>
       </div>
+      <div className="flex justify-between items-center mb-6">
+        <button
+          onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+          className="px-4 py-2 bg-red-600 text-white rounded"
+        >
+          Logout
+        </button>
+      </div>
+
     </main>
   )
 }
